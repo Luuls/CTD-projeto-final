@@ -11,6 +11,6 @@ end COMP_erro;
 architecture circuit of COMP_erro is
 
 begin
-    diferente <= '1' when E0 = E1 else
-                 '0';
+    diferente <= '0' when E0 = E1 else
+                 '1';
 end circuit;
