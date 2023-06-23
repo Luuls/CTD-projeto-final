@@ -48,8 +48,10 @@ port(
 end component;
 
 component ButtonSync is port( --saida ja negada
+
     KEY1, KEY0, CLK: in  std_logic;
-    BTN1, BTN0: out std_logic);
+    BTN1, BTN0   : out std_logic);
+
 end component;
 
 begin
