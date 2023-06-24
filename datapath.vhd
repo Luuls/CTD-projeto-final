@@ -172,7 +172,7 @@ port(
 );
 end component;
 
-component COMP_erro is
+component COMP_error is
 port(
 	E0, E1: in std_logic_vector(14 downto 0);
 	diferente: out std_logic
