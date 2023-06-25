@@ -3,12 +3,12 @@ use ieee.std_logic_1164.all;
 
 entity topo is
 port(
-		CLOCK_50: in std_logic;
-		CLK_500Hz: in std_logic;
-		KEY: in std_logic_vector(1 downto 0);
-		SW: in std_logic_vector(17 downto 0);
-		HEX0, HEX1, HEX2, HEX3, HEX4, HEX5, HEX6, HEX7: out std_logic_vector(6 downto 0);
-		LEDR: out std_logic_vector(15 downto 0)
+    CLOCK_50: in std_logic;
+    CLK_500Hz: in std_logic;
+    KEY: in std_logic_vector(1 downto 0);
+    SW: in std_logic_vector(17 downto 0);
+    HEX0, HEX1, HEX2, HEX3, HEX4, HEX5, HEX6, HEX7: out std_logic_vector(6 downto 0);
+    LEDR: out std_logic_vector(15 downto 0)
 );	
 end topo;
 

@@ -2,8 +2,10 @@ library IEEE;
 use IEEE.Std_Logic_1164.all;
 
 entity decod0F is
-port (C:  in std_logic_vector(3 downto 0);
-      F:  out std_logic_vector(6 downto 0) );
+port (
+    C:  in std_logic_vector(3 downto 0);
+    F:  out std_logic_vector(6 downto 0)
+);
 end decod0F;
 
 architecture decod of decod0F is

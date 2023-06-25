@@ -4,12 +4,13 @@ use IEEE.std_logic_arith.all;
 use IEEE.std_logic_unsigned.all;
 
 entity counter_time is
-    port(reset: in std_logic;
+port(
+    reset: in std_logic;
     enable: in std_logic;
     clk: in std_logic;
     is_zero: out std_logic;
     tempo: out std_logic_vector(3 downto 0)
-    );
+);
 end counter_time;
 
 architecture circuit of counter_time is

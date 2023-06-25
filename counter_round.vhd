@@ -4,12 +4,13 @@ use IEEE.std_logic_arith.all;
 use IEEE.std_logic_unsigned.all;
 
 entity counter_round is
-    port(reset: in std_logic;
+port(
+    reset: in std_logic;
     enable: in std_logic;
     clk: in std_logic;
     is_15: out std_logic;
     round_x: out std_logic_vector(3 downto 0)
-    );
+);
 end counter_round;
 
 architecture circuit of counter_round is

@@ -2,12 +2,13 @@ library IEEE;
 use IEEE.std_logic_1164.all;
 
 entity reg_15bits is
-    port(in_reg_15bits: in std_logic_vector(14 downto 0);
+port(
+    in_reg_15bits: in std_logic_vector(14 downto 0);
     load: in std_logic;
     reset: in std_logic;
     clk: in std_logic;
     out_reg_15bits: out std_logic_vector(14 downto 0)
-    );
+);
 end reg_15bits;
 
 architecture circuit of reg_15bits is

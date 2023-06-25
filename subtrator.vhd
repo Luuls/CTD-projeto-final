@@ -4,10 +4,11 @@ use IEEE.std_logic_arith.all;
 use IEEE.std_logic_unsigned.all;
 
 entity of subtrator is
-    port(enable: in std_logic;
+port(
+    enable: in std_logic;
     number: in std_logic_vector(3 downto 0);
     result: out std_logic_vector(3 downto 0)
-    );
+);
 end subtrator;
 
 architecture circuit of subtrator is

@@ -2,12 +2,13 @@ library IEEE;
 use IEEE.std_logic_1164.all;
 
 entity reg_bonus is
-    port(in_reg_4bits: in std_logic_vector(3 downto 0);
+port(
+    in_reg_4bits: in std_logic_vector(3 downto 0);
     load: in std_logic;
     reset: in std_logic;
     clk: in std_logic;
     out_reg_4bits: out std_logic_vector(3 downto 0)
-    );
+);
 end reg_bonus;
 
 architecture circuit of reg_bonus is
