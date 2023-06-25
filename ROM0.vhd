@@ -1,19 +1,17 @@
-library ieee;
-use ieee.std_logic_1164.all;
-use ieee.numeric_std.all;
+library IEEE;
+use IEEE.std_logic_1164.all;
+use IEEE.numeric_std.all;
 
 entity ROM0 is
 port(
-	  address: in std_logic_vector(3 downto 0);
-	  output : out std_logic_vector(31 downto 0)
+    address: in std_logic_vector(3 downto 0);
+    output : out std_logic_vector(31 downto 0)
 );
 end ROM0;
 
 architecture arc_ROM0 of ROM0 is
 begin
-
     --         HEX7      HEX6     HEX5     HEX4     HEX3     HEX2     HEX1     HEX0               round
-
     output <= "1111"	& "0110" & "1111" & "1111"	& "0001" & "1111" & "1101" & "1111" when address = "0000" else
              --         des        6       des      des       1       des       D       des
 
@@ -61,5 +59,4 @@ begin
 
               "1111"	& "1011" & "1111" & "0100"	& "1111" & "1111" & "1111" & "0011";
 --          des        B       des       4       des      des      des       3
-
 end arc_ROM0;

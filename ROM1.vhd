@@ -11,6 +11,7 @@ end ROM1;
 
 architecture arc_ROM1 of ROM1 is
 begin
+    --         HEX7      HEX6     HEX5     HEX4     HEX3     HEX2     HEX1     HEX0                round
     output <= "1111" & "1111" & "1001" & "1101" & "1111" & "1111" & "1100" & "1011" when address = "0000" else
               --des      des      9      D      des      des      C      B
 

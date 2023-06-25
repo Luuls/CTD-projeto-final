@@ -11,6 +11,8 @@ end ROM1a;
 
 architecture arc_ROM1a of ROM1a is
 begin
+--            switches 0 a 14
+--            EDCBA9876543210                  round
     output <= "011101000000000" when address = "0000" else
               "010000100010001" when address = "0001" else
               "000000100110001" when address = "0010" else
