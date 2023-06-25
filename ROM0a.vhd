@@ -12,8 +12,8 @@ end ROM0a;
 architecture arc_ROM0a of ROM0a is
 begin
 
---         switches 0 a 14
---         EDCBA9876543210                 round
+--          switches 0 a 14
+--          EDCBA9876543210                  round
 output <=   "010000001000010" when address = "0000" else --ROM0 possui os valores 6, 1 e D no round 0.
             "000010010010000" when address = "0001" else
             "001100100000000" when address = "0010" else
