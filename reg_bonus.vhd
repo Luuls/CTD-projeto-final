@@ -15,7 +15,7 @@ begin
     process(clk, reset) is --verificar identação
     begin 
         if (reset = '1') then
-            out_reg_4bits = "1000";
+            out_reg_4bits <= "1000";
 
         elsif rising_edge(clk) then
             if(load='1') then
