@@ -1,7 +1,7 @@
 library IEEE;
 use IEEE.std_logic_1164.all;
 
-entity controle is
+entity control is
 port(
 -- Entradas de controle
 	enter, reset, CLOCK: in std_logic;
@@ -10,9 +10,9 @@ port(
 -- Saídas de comandos
 	R1, R2, E1, E2, E3, E4, E5: out std_logic
 );
-end controle;
+end control;
 
-architecture circuit of controle is
+architecture circuit of control is
 
 begin
 

@@ -24,7 +24,7 @@ port(
 	clk: in std_logic;
 	SW: in std_logic_vector(17 downto 0);
 	
-	-- Entradas de controle
+	-- Entradas de control
 	R1, R2, E1, E2, E3, E4, E5: in std_logic;
 	
 	-- Saídas de dados
@@ -36,7 +36,7 @@ port(
 );
 end component;
 
-component controle is
+component control is
 port(
 -- Entradas de controle
 	enter, reset, CLOCK: in std_logic;
