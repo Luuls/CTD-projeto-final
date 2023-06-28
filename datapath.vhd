@@ -261,5 +261,49 @@ end component;
 -- COMECO DO CODIGO ---------------------------------------------------------------------------------------
 
 begin	
+    E2orE3 <= E2 or E3;
+    FSMCLOCK: FSM_clock_emu port map(R1, E2orE3, clk, CLK_1Hz, CLK_050Hz, CLK_033Hz, CLK_025Hz, CLK_020Hz);
 
+    REG_SEL: registrador_sel port map(SW(3 downto 0), E1, R2, clk, SEL);
+    
+    MUX_CLOCK: mux4x1_1bit port map(CLK_020Hz, CLK_025Hz, CLK_033Hz, CLK_050Hz, SEL(1 downto 0), end_FPGA);
+
+    ROM_0: ROM0 port map(X, srom0);
+    ROM_1: ROM1 port map(X, srom1);
+    ROM_2: ROM2 port map(X, srom2);
+    ROM_3: ROM3 port map(X, srom3);
+    MUX_CODE: mux4x1_32bits port map(srom0, srom1, srom2, srom3, SEL(3 downto 2), CODE);
+
+    ROM_0a: ROM0a port map(X, srom0a);
+    ROM_1a: ROM1a port map(X, srom1a);
+    ROM_2a: ROM2a port map(X, srom2a);
+    ROM_3a: ROM3a port map(X, srom3a);
+    MUX_CODE_AUX: mux4x1_15bits port map(srom0a, srom1a, srom2a, srom3a, SEL(3 downto 2), CODE_aux);
+    
+    REG_USER: registrador_user port map(SW(14 downto 0), E3, R2, clk, USER);
+    
+    COMPARA_IGUAL: COMP_error port map(CODE_aux, USER, erro);
+
+    REG_BONUS: registrador_bonus port map(Bonus, E4, R2, clk, Bonus_reg);
+    SUBTRATOR: subtracao port map(erro, Bonus_reg, Bonus);
+    
+    COMPARA_0: COMP_end port map(Bonus_reg, end_game);
+
+    LOGICA_PONTOS: logica port map(X, Bonus_reg, SEL(1 downto 0), RESULT);
+
+    CONTA_TEMPO: counter_time port map(R1, E3, CLK_1Hz, end_time, tempo);
+    
+    CONTA_ROUND: counter_round port map(R2, E4, clk, end_round, X);
+
+    E23 <= E2 nor E3;
+    E25 <= E2 nor E5;
+    E12 <= E1 nor E2;
+
+    TERMO_BONUS: decoder_termometrico port map(Bonus_reg, stermobonus);
+    TERMO_ROUND: decoder_termometrico port map(X, stermoround);
+    andtermo <= stermoround and (not E1);
+    MUX_LED: mux2x1_16bits port map(andtermo, stermobonus, SW(17), ledr);
+    
+    DCODE_7: d_code port map(CODE(31 downto 28), sdecod7);
+    DEC7: decod7seg port map(RESULT(7 downto 4), sdec7);
 end arc;
