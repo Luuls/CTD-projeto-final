@@ -26,7 +26,7 @@ begin
             is_15_signal <= '0';
 
         elsif (rising_edge(clk) and enable = '1') then
-            counter_4bits <= counter_4bits + '1';
+            counter_4bits <= counter_4bits + "0001";
 
             if (is_15_signal = '1') then
                 counter_4bits <= counter_4bits; -- nao faz nada

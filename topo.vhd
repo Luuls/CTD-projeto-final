@@ -36,7 +36,7 @@ port(
 );
 end component;
 
-component control is
+component controle is
 port(
 -- Entradas de controle
 	enter, reset, CLOCK: in std_logic;

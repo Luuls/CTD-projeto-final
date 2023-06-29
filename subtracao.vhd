@@ -3,7 +3,7 @@ use IEEE.std_logic_1164.all;
 use IEEE.std_logic_arith.all;
 use IEEE.std_logic_unsigned.all;
 
-entity of subtracao is
+entity subtracao is
 port(
     enable: in std_logic;
     number: in std_logic_vector(3 downto 0);

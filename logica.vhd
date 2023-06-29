@@ -16,6 +16,8 @@ architecture circuit of logica is
            bonus_vezes_2, -- 4 * B / 2 = 2B
            round_sobre_4: std_logic_vector(7 downto 0);
 
+    signal round_plus_1: std_logic_vector(4 downto 0);
+
 begin
     -- Valor máximo possível de pontuação é 159
     -- 8 bits necessários para representar a pontuação
@@ -28,12 +30,15 @@ begin
 
     -- bônus em 8 bits
     -- 0000xxxx
-    -- 00xxxx00 -> 2 * bônus
-    bonus_vezes_2 <= "00" & bonus & "00";
+    -- 00000xxx -> bônus / 2
+    -- 000xxx00 -> 4 * bônus / 2
+    bonus_vezes_2 <= "000" & bonus(3 downto 1) & "0";
     
     -- round em 8 bits:
     -- 0000xxxx
     -- 000000xx -> round / 2
+    
+    round_plus_1 <= ('0' & round) + "0001";
     round_sobre_4 <= "000000" & (round(3 downto 2));
 
     points <= nivel_vezes_32 + bonus_vezes_2 + round_sobre_4;

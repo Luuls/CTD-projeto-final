@@ -30,10 +30,10 @@ begin
 
     process(CLOCK, reset)
     begin
-        if reset = '1' then
+        if (reset = '1') then
             current_state <= Init;
 
-        elsif rising_edge(CLOCK) then
+        elsif (rising_edge(CLOCK)) then
             current_state <= next_state;
         end if;
     end process;
@@ -80,10 +80,10 @@ begin
 
             when Play_User =>
                 if (enter = '1') then
-                    next_state <= Result;
+                    next_state <= Count_Round;
 
                 elsif (end_time = '1') then
-                    next_state <= Count_Round;
+                    next_state <= Result;
                     
                 end if;
 

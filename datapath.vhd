@@ -57,20 +57,26 @@ signal E2orE3: std_logic;
 -- PARA O OR DOS DISPLAYS
 signal E23_7VEZES, E25_7VEZES, E12_7VEZES: std_logic_vector(6 downto 0);
 
+signal E1_16VEZES: std_logic_vector(15 downto 0);
+
 ---------------------------COMPONENTS-----------------------------------------------------------
 component counter_time is 
 port(
-	R, E, clock: in std_logic;
-	Q: out std_logic_vector(3 downto 0);
-	tc: out std_logic
+    reset: in std_logic;
+    enable: in std_logic;
+    clk: in std_logic;
+    is_zero: out std_logic;
+    tempo: out std_logic_vector(3 downto 0)
 );
 end component;
 
 component counter_round is
 port(
-	R, E, clock: in std_logic;
-	Q: out std_logic_vector(3 downto 0);
-	tc: out std_logic
+    reset: in std_logic;
+    enable: in std_logic;
+    clk: in std_logic;
+    is_15: out std_logic;
+    round_x: out std_logic_vector(3 downto 0)
 );
 end component;
 
@@ -153,25 +159,31 @@ end component;
 
 component registrador_sel is 
 port(
-	R, E, clock: in std_logic;
-	D: in std_logic_vector(3 downto 0);
-	Q: out std_logic_vector(3 downto 0) 
+    in_reg_sel: in std_logic_vector(3 downto 0);
+    load: in std_logic;
+    reset: in std_logic;
+    clk: in std_logic;
+    out_reg_sel: out std_logic_vector(3 downto 0)
 );
 end component;
 
 component registrador_user is 
 port(
-	R, E, clock: in std_logic;
-	D: in std_logic_vector(14 downto 0);
-	Q: out std_logic_vector(14 downto 0) 
+    in_reg_user: in std_logic_vector(14 downto 0);
+    load: in std_logic;
+    reset: in std_logic;
+    clk: in std_logic;
+    out_reg_user: out std_logic_vector(14 downto 0)
 );
 end component;
 
 component registrador_bonus is 
 port(
-	S, E, clock: in std_logic;
-	D: in std_logic_vector(3 downto 0);
-	Q: out std_logic_vector(3 downto 0) 
+    in_reg_bonus: in std_logic_vector(3 downto 0);
+    load: in std_logic;
+    reset: in std_logic;
+    clk: in std_logic;
+    out_reg_bonus: out std_logic_vector(3 downto 0)
 );
 end component;
 
@@ -191,9 +203,9 @@ end component;
 
 component subtracao is
 port(
-	E0: in std_logic_vector(3 downto 0);
-	E1: in std_logic;
-	resultado: out std_logic_vector(3 downto 0)
+    enable: in std_logic;
+    number: in std_logic_vector(3 downto 0);
+    result: out std_logic_vector(3 downto 0)
 );
 end component;
 
@@ -299,17 +311,18 @@ begin
     CONTA_ROUND: counter_round port map(R2, E4, clk, end_round, X);
 
     E23 <= E2 nor E3;
-    E23_7VEZES <= E23 & E23 & E23 & E23 & E23 & E23 & E23 & E23;
+    E23_7VEZES <= E23 & E23 & E23 & E23 & E23 & E23 & E23;
     
     E25 <= E2 nor E5;
-    E25_7VEZES <= E25 & E25 & E25 & E25 & E25 & E25 & E25 & E25;
+    E25_7VEZES <= E25 & E25 & E25 & E25 & E25 & E25 & E25;
     
     E12 <= E1 nor E2;
-    E12_7VEZES <= E12 & E12 & E12 & E12 & E12 & E12 & E12 & E12;
+    E12_7VEZES <= E12 & E12 & E12 & E12 & E12 & E12 & E12;
 
     TERMO_BONUS: decoder_termometrico port map(Bonus_reg, stermobonus);
     TERMO_ROUND: decoder_termometrico port map(X, stermoround);
-    andtermo <= stermoround and (not E1);
+    E1_16VEZES <= E1 & E1 & E1 & E1 & E1 & E1 & E1 & E1 & E1 & E1 & E1 & E1 & E1 & E1 & E1 & E1;
+    andtermo <= stermoround and (not E1_16VEZES);
     MUX_LED: mux2x1_16bits port map(andtermo, stermobonus, SW(17), ledr);
     
     DCODE_7: d_code port map(CODE(31 downto 28), sdecod7);

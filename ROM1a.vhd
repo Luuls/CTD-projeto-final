@@ -4,8 +4,8 @@ use IEEE.numeric_std.all;
 
 entity ROM1a is
 port(
-	  address: in std_logic_vector(3 downto 0);
-	  output : out std_logic_vector(31 downto 0)
+    address: in std_logic_vector(3 downto 0);
+    output : out std_logic_vector(14 downto 0)
 );
 end ROM1a;
 
@@ -29,4 +29,4 @@ begin
               "000001101100000" when address = "1101" else
               "100000011001000" when address = "1110" else
               "010010100000100";
-end arc_ROM1a
+end arc_ROM1a;

@@ -12,15 +12,19 @@ port(
 end registrador_sel;
 
 architecture circuit of registrador_sel is
+    signal out_signal: std_logic_vector(3 downto 0);
+    
 begin
+    out_reg_sel <= out_signal;
+    
     process(clk, reset) is --verificar identação
     begin 
         if (reset = '1') then
-            out_reg_sel <= "0000";
+            out_signal <= "0000";
 
         elsif rising_edge(clk) then
             if(load='1') then
-                out_reg_sel <= in_reg_sel;
+                out_signal <= in_reg_sel;
             end if;
         end if;
     end process;

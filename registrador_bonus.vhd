@@ -9,7 +9,7 @@ port(
     clk: in std_logic;
     out_reg_bonus: out std_logic_vector(3 downto 0)
 );
-end reg_bonus;
+end registrador_bonus;
 
 architecture circuit of registrador_bonus is
 begin

@@ -26,14 +26,15 @@ begin
             is_zero_signal <= '0';
 
         elsif (rising_edge(clk) and enable = '1') then
-            counter_4bits <= counter_4bits - '1';
-
             if (is_zero_signal = '1') then
                 counter_4bits <= counter_4bits;
 
             elsif (counter_4bits = "0000") then
                 is_zero_signal <= '1';
                 counter_4bits <= "1010";
+
+            else 
+                counter_4bits <= counter_4bits - "0001";
             end if;
         end if;
     end process;

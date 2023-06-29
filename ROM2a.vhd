@@ -7,7 +7,7 @@ port(
     address: in std_logic_vector(3 downto 0);
     output : out std_logic_vector(14 downto 0)
 );
-end ROM2a
+end ROM2a;
 
 architecture arc_ROM2a of ROM2a is
 begin

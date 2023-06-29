@@ -7,7 +7,7 @@ port(
     address: in std_logic_vector(3 downto 0);
     output : out std_logic_vector(14 downto 0)
 );
-end ROM3a
+end ROM3a;
 
 architecture arc_ROM3a of ROM3a is
 begin
@@ -30,20 +30,3 @@ begin
               "000011101010100" when address = "1110" else
               "000000100011111";
 end arc_ROM3a;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
