@@ -54,6 +54,9 @@ signal srom0a, srom1a, srom2a, srom3a: std_logic_vector(14 downto 0);
 --FSM_clock
 signal E2orE3: std_logic;
 
+-- PARA O OR DOS DISPLAYS
+signal E23_7VEZES, E25_7VEZES, E12_7VEZES: std_logic_vector(6 downto 0);
+
 ---------------------------COMPONENTS-----------------------------------------------------------
 component counter_time is 
 port(
@@ -296,8 +299,13 @@ begin
     CONTA_ROUND: counter_round port map(R2, E4, clk, end_round, X);
 
     E23 <= E2 nor E3;
+    E23_7VEZES <= E23 & E23 & E23 & E23 & E23 & E23 & E23 & E23;
+    
     E25 <= E2 nor E5;
+    E25_7VEZES <= E25 & E25 & E25 & E25 & E25 & E25 & E25 & E25;
+    
     E12 <= E1 nor E2;
+    E12_7VEZES <= E12 & E12 & E12 & E12 & E12 & E12 & E12 & E12;
 
     TERMO_BONUS: decoder_termometrico port map(Bonus_reg, stermobonus);
     TERMO_ROUND: decoder_termometrico port map(X, stermoround);
@@ -306,4 +314,41 @@ begin
     
     DCODE_7: d_code port map(CODE(31 downto 28), sdecod7);
     DEC7: decod7seg port map(RESULT(7 downto 4), sdec7);
+    MUX_HEX7: mux2x1_7bits port map(sdecod7, sdec7, E5, smuxhex7);
+    hex7 <= smuxhex7 or E25_7VEZES;
+    
+    DCODE_6: d_code port map(CODE(27 downto 24), sdecod6);
+    DEC6: decod7seg port map(RESULT(3 downto 0), sdec6);
+    MUX_HEX6: mux2x1_7bits port map(sdecod6, sdec6, E5, smuxhex6);
+    hex6 <= smuxhex6 or E25_7VEZES;
+    
+    DCODE_5: d_code port map(CODE(23 downto 20), sdecod5);
+    MUX_HEX5: mux2x1_7bits port map(sdecod5, "0000111", E3, smuxhex5);
+    hex5 <= smuxhex5 or E23_7VEZES;
+    
+    DCODE_4: d_code port map(CODE(19 downto 16), sdecod4);
+    DEC4: decod7seg port map(tempo, sdec4);
+    MUX_HEX4: mux2x1_7bits port map(sdecod4, sdec4, E3, smuxhex4);
+    hex4 <= smuxhex4 or E23_7VEZES;
+    
+    DCODE_3: d_code port map(CODE(15 downto 12), sdecod3);
+    MUX_HEX3: mux2x1_7bits port map(sdecod3, "1000110", E1, smuxhex3);
+    hex3 <= smuxhex3 or E12_7VEZES;
+    
+    edec2 <= "00" & SEL(3 downto 2);
+    DCODE_2: d_code port map(CODE(11 downto 8), sdecod2);
+    DEC2: decod7seg port map(edec2, sdec2);
+    MUX_HEX2: mux2x1_7bits port map(sdecod2, sdec2, E1, smuxhex2);
+    hex2 <= smuxhex2 or E12_7VEZES;
+    
+    DCODE_1: d_code port map(CODE(7 downto 4), sdecod1);
+    MUX_HEX1: mux2x1_7bits port map(sdecod1, "1000111", E1, smuxhex1);
+    hex1 <= smuxhex1 or E12_7VEZES;
+    
+    edec0 <= "00" & SEL(1 downto 0);
+    DCODE_0: d_code port map(CODE(3 downto 0), sdecod0);
+    DEC0: decod7seg port map(edec0, sdec0);
+    MUX_HEX0: mux2x1_7bits port map(sdecod0, sdec0, E1, smuxhex0);
+    hex0 <= smuxhex0 or E12_7VEZES;
+    
 end arc;
